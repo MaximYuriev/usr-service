@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..base.model import Base
+from src.infrastructure.database.models.base import Base
 
 
 class UserModel(Base):

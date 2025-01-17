@@ -2,12 +2,12 @@ import uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .domain import User
-from .exceptions import UserNotFoundException
-from .model import UserModel
+from src.domain.interfaces.repositories.user import IUserRepository
+from src.domain.entities.user import User
+from src.infrastructure.database.models.user import UserModel
 
 
-class UserRepository:
+class UserRepository(IUserRepository):
     domain = User
     model = UserModel
 
@@ -26,15 +26,14 @@ class UserRepository:
         )
 
     async def _get_user_model_by_pk(self, user_id: uuid.UUID) -> model | None:
-        return await self._session.get(UserModel, user_id)
+        return await self._session.get(self.model, user_id)
 
     async def save(self, user: domain) -> None:
         user_model = self._domain_to_model(user)
         self._session.add(user_model)
         await self._session.commit()
 
-    async def get(self, user_id: uuid.UUID) -> domain:
+    async def get(self, user_id: uuid.UUID) -> domain | None:
         user_model = await self._get_user_model_by_pk(user_id=user_id)
-        if user_model is None:
-            raise UserNotFoundException
-        return self._model_to_domain(user_model)
+        if user_model is not None:
+            return self._model_to_domain(user_model)
