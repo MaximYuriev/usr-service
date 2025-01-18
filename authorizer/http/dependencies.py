@@ -1,3 +1,4 @@
+import uuid
 from typing import Annotated
 
 from fastapi import Depends, Request
@@ -15,7 +16,7 @@ def get_token_from_cookie(request: Request) -> str:
     raise HTTPUnauthorizedException
 
 
-def get_user_id_from_token(token: Annotated[str, Depends(get_token_from_cookie)]) -> str:
+def get_user_id_from_token(token: Annotated[str, Depends(get_token_from_cookie)]) -> uuid.UUID:
     try:
         return Authorizer.get_user_id_from_token(token)
     except AuthTokenInvalidException:

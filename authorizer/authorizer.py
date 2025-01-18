@@ -1,3 +1,5 @@
+import uuid
+
 from authorizer.auth.payloads import AccessPayload
 from authorizer.auth.token import JWT
 
@@ -9,6 +11,6 @@ class Authorizer:
         return AccessPayload(**payload)
 
     @classmethod
-    def get_user_id_from_token(cls, access_token: str) -> str:
+    def get_user_id_from_token(cls, access_token: str) -> uuid.UUID:
         payload = cls._get_access_token_payload(access_token)
-        return payload.sub
+        return uuid.UUID(payload.sub)
