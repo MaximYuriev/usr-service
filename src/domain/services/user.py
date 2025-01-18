@@ -2,7 +2,6 @@ import uuid
 
 from src.domain.dto.user import UpdateUserDTO
 from src.domain.entities.user import User
-from src.domain.exceptions.user import UserNotFoundException
 from src.domain.interfaces.repositories.user import IUserRepository
 
 
