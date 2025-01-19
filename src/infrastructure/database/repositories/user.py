@@ -3,6 +3,7 @@ import uuid
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.domain.dto.user import UpdateUserDTO
 from src.domain.exceptions.user import UserNotFoundException
 from src.domain.interfaces.repositories.user import IUserRepository
 from src.domain.entities.user import User
@@ -43,8 +44,10 @@ class UserRepository(IUserRepository):
         if user_model is not None:
             return self._model_to_domain(user_model)
 
-    async def update(self, user: domain) -> None:
-        user_model = self._get_user_model_by_pk(user_id=user.user_id)
-        for key, value in user.__dict__.items():
+    async def update(self, update_user: UpdateUserDTO) -> None:
+        user_model = await self._get_user_model_by_pk(user_id=update_user.user_id)
+        for key, value in update_user.__dict__.items():
+            if key == "user_id" or value is None:
+                continue
             setattr(user_model, key, value)
         await self._session.commit()

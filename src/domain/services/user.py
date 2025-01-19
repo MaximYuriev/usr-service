@@ -16,7 +16,5 @@ class UserService:
         user = await self._repository.get(user_id)
         return user
 
-    async def update_user(self, user: User, updated_user_data: UpdateUserDTO) -> None:
-        for key, value in updated_user_data.__dict__.items():
-            setattr(user, key, value)
-        await self._repository.update(user)
+    async def update_user(self, update_user: UpdateUserDTO) -> None:
+        await self._repository.update(update_user)
