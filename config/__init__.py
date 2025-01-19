@@ -10,7 +10,6 @@ __all__ = (
     "COOKIE_KEY_NAME",
     "PUBLIC_KEY_PATH",
     "PRIVATE_KEY_PATH",
-
 )
 
 from .config import (

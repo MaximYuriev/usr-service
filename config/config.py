@@ -13,6 +13,7 @@ POSTGRES_USER = os.environ.get("POSTGRES_USER")
 
 RMQ_PASS = os.environ.get("RMQ_PASS")
 RMQ_USER = os.environ.get("RMQ_USER")
+RMQ_HOST = os.environ.get("RMQ_HOST")
 
 PRIVATE_KEY_PATH = pathlib.Path(os.environ.get("PRIVATE_KEY_PATH"))
 PUBLIC_KEY_PATH = pathlib.Path(os.environ.get("PUBLIC_KEY_PATH"))

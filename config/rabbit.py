@@ -1,3 +1,3 @@
-from .config import RMQ_PASS, RMQ_USER
+from .config import RMQ_PASS, RMQ_USER, RMQ_HOST
 
-rabbit_url = f"amqp://{RMQ_USER}:{RMQ_PASS}@localhost:5672/"
+rabbit_url = f"amqp://{RMQ_USER}:{RMQ_PASS}@{RMQ_HOST}:5672/"
