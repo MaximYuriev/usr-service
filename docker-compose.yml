@@ -9,17 +9,7 @@ services:
     depends_on:
       - db
 
-  faststream:
-    build: .
-    command: faststream run src.infrastructure.broker.consumers.user:app
-    env_file:
-      - .dock.env
-    depends_on:
-      - db
-      - web
-
   db:
-    hostname: postgres
     image: postgres:15.3
     expose:
       - 5432
